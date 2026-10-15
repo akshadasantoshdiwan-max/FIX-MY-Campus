@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <title>FixMyCampus — Campus Issue Management</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<header class="topbar"><div class="nav wrap"><a class="brand" href="/">Fix<span>MyCampus</span></a><div class="nav-actions"><button class="btn btn-light" id="adminToggle">Admin</button><button class="btn" id="reportTop">＋ Report Issue</button></div></div></header>
+<main class="wrap main">
+  <section class="hero">
+    <div><span class="eyebrow">A better campus starts here</span><h1>See it. <span>Report it.</span><br>Fix it.</h1><p>Help make your campus safer, cleaner and better. Report maintenance problems and track them from submission to resolution.</p><button class="btn btn-large" id="reportHero">Report a Campus Issue</button></div>
+    <aside class="how card"><div class="how-icon">🛠️</div><h2>How it works</h2><ol><li>Report an issue</li><li>Campus team reviews it</li><li>Maintenance is assigned</li><li>Track the progress</li><li>See when it is resolved</li></ol></aside>
+  </section>
+  <section class="stats">
+    <article class="card stat"><span class="stat-icon blue">▤</span><strong id="total">0</strong><span class="muted">Total Reports</span></article>
+    <article class="card stat"><span class="stat-icon amber">◷</span><strong id="progress">0</strong><span class="muted">In Progress</span></article>
+    <article class="card stat"><span class="stat-icon green">✓</span><strong id="resolved">0</strong><span class="muted">Resolved</span></article>
+  </section>
+  <section class="section"><div class="section-head"><div><span class="eyebrow">Get started</span><h2>Quick Actions</h2></div></div><div class="actions">
+    <button class="card action" id="quickReport"><span class="action-icon">🧰</span><strong>Report an Issue</strong><span>Tell the campus team about a problem.</span></button>
+    <button class="card action" id="myComplaints"><span class="action-icon">📋</span><strong>Recent Reports</strong><span>Browse submitted issues and their status.</span></button>
+    <button class="card action" id="howButton"><span class="action-icon">ℹ️</span><strong>How it Works</strong><span>Learn about the complaint process.</span></button>
+  </div></section>
+  <section class="section" id="reportsSection"><div class="section-head reports-head"><div><span class="eyebrow">Campus community</span><h2>Recent Reports</h2></div><div class="filters"><input id="search" type="search" placeholder="Search reports…" aria-label="Search reports"><select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option>Submitted</option><option>In Progress</option><option>Resolved</option><option>Rejected</option></select></div></div><div id="reports" class="report-list"><div class="empty card">Loading reports…</div></div></section>
+</main>
+<footer>FixMyCampus <span>•</span> Campus Issue Management System</footer>
+
+<dialog id="reportDialog" class="dialog"><div class="dialog-head"><div><span class="eyebrow">Help improve your campus</span><h2>Report an Issue</h2></div><button class="icon-button" data-close="reportDialog" aria-label="Close">✕</button></div>
+<form id="reportForm"><label for="name">Your Name</label><input id="name" name="name" required maxlength="100" placeholder="Enter your name">
+<label for="category">Issue Category</label><select id="category" name="category" required><option value="">Select category</option><option>Electrical</option><option>Cleanliness</option><option>Washroom</option><option>Furniture</option><option>Wi-Fi / Internet</option><option>Water Supply</option><option>Safety</option><option>Other</option></select>
+<label for="location">Campus Location</label><input id="location" name="location" required maxlength="160" placeholder="e.g. Library, 2nd Floor">
+<label for="description">Description</label><textarea id="description" name="description" required maxlength="2000" placeholder="Describe the problem…"></textarea>
+<label for="photo">Photo (optional, max 5 MB)</label><input id="photo" name="photo" type="file" accept="image/*">
+<p class="form-note">Please do not upload photos containing sensitive personal information.</p><p class="message" id="formMessage" role="status"></p><button class="btn submit" type="submit">Submit Complaint</button></form></dialog>
+
+<dialog id="adminDialog" class="dialog"><div class="dialog-head"><div><span class="eyebrow">Staff tools</span><h2>Admin Dashboard</h2></div><button class="icon-button" data-close="adminDialog" aria-label="Close">✕</button></div>
+<p class="form-note">Enter the admin key configured on the server. The demo default is <code>change-this-admin-key</code>; change it before deployment.</p>
+<form id="adminKeyForm"><label for="adminKey">Admin Key</label><input id="adminKey" type="password" required autocomplete="current-password"><button class="btn submit" type="submit">Unlock Admin Tools</button></form>
+<div id="adminTools" hidden><hr><h3>Update a report</h3><form id="statusForm"><label for="adminReportId">Report ID</label><input id="adminReportId" required placeholder="FMC-123456-ABC"><label for="newStatus">New Status</label><select id="newStatus"><option>Submitted</option><option>In Progress</option><option>Resolved</option><option>Rejected</option></select><label for="adminNote">Update note (optional)</label><textarea id="adminNote" maxlength="500" placeholder="Add a note for the report history"></textarea><p class="message" id="adminMessage" role="status"></p><button class="btn submit" type="submit">Update Status</button></form></div></dialog>
+
+<dialog id="infoDialog" class="dialog"><div class="dialog-head"><div><span class="eyebrow">Simple, transparent, trackable</span><h2>How FixMyCampus Works</h2></div><button class="icon-button" data-close="infoDialog" aria-label="Close">✕</button></div><ol class="info-list"><li><b>Submit a report.</b> Add a category, location and clear description. You can attach a photo.</li><li><b>Review.</b> Campus staff review the submitted issue.</li><li><b>Action.</b> Staff can change the status to In Progress, Resolved or Rejected.</li><li><b>Track.</b> Reports appear in the recent reports list with their current status and report ID.</li></ol><p class="form-note">This starter project stores data on the server in a JSON file. For production use, add a proper database, student/staff authentication, backups and access controls.</p></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body></html>
